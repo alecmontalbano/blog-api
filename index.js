@@ -6,8 +6,10 @@ const port = process.env.PORT || 8081;
 
 //middleware imports
 const morgan = require('morgan');
+const cors = require('cors');
 
 //wire up middleware
+server.use(cors());
 server.use(morgan('dev'));
 
 server.get('/', (req, res) => {
