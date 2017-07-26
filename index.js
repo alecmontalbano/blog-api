@@ -1,8 +1,15 @@
 /*jshint esversion:6*/
 const express = require('express');
+const mongoose = require('mongoose');
 const server = express();
 
+const { mongoURI } = require('./credentials');
 const port = process.env.PORT || 8081;
+
+//connect to database
+mongoose.connect(mongoURI, {
+  useMongoClient: true
+});
 
 //middleware imports
 const morgan = require('morgan');
