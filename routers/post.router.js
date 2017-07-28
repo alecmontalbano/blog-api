@@ -21,7 +21,13 @@ router.get('/posts/:postId', (req, res) => {
 });
 
 router.post('/posts', (req, res) => {
-  res.send('creating that new post requested!');
+  const newPost = new Post(req.body);
+  newPost.save(function(err, post){
+    if(err) return res.status(500).json({err: err});
+    return res.status(201).json({
+      msg: "Successfully created post"
+    });
+  });
 });
 router.put('/posts/:postId', (req, res) => {
   Post.findOneAndUpdate({_id: req.params.postId}, req.body, function(err){
